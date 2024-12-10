@@ -1,7 +1,6 @@
 ---
-- hosts: web_servers
-  become: true
+- hosts: all
   tasks:
-    - name: Print OS info
-      ansible.builtin.package:
-        name: apache2
+    - name: Print message
+      debug:
+        msg: Hello Ansible World
