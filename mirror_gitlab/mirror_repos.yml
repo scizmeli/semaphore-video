@@ -10,7 +10,7 @@
   tasks:
   - include_tasks: mirror_gitlab_tasks.yml
     vars:
-      repo_name: my_repo_name_1
+      repo_name: melda-server
       source_url: 'https://gitlab.pranageo.com/melda/melda-server.git'
       dest_url: 'https://gitlab.com/m5221/melda-server.git'
 
