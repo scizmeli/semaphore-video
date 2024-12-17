@@ -1,20 +1,22 @@
 ---
-- hosts: all
+- name: Update packages and reboot machine
+  hosts: all
   become: true
   tasks:
     - name: Print message
-      debug:
+      ansible.builtin.debug:
         msg: Hello Ansible World
     - name: Update all packages to their latest version
       ansible.builtin.apt:
         name: "*"
-        state: latest
-        autoremove: yes
+        state: latest # noqa package-latest
+        autoremove: true
+        force_apt_get: true
     - name: Check if a reboot is required.
       ansible.builtin.stat:
         path: /var/run/reboot-required
-        get_checksum: no
+        get_checksum: false
       register: reboot_required_file
     - name: Reboot the server (if required).
       ansible.builtin.reboot:
-      when: reboot_required_file.stat.exists == true and reboot_required_file is defined 
+      when: reboot_required_file.stat.exists and reboot_required_file is defined
